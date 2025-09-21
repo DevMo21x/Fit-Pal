@@ -1,0 +1,452 @@
+{
+  "modelName": "New Model",
+  "collections": [
+    {
+      "collectionName": "gym_sessions",
+      "type": "object",
+      "properties": [
+        {
+          "code": "",
+          "name": "user",
+          "isActivated": true,
+          "type": "document",
+          "properties": [
+            {
+              "code": "",
+              "name": "userId",
+              "isActivated": true,
+              "type": "string",
+              "properties": [],
+              "primaryKey": false,
+              "GUID": "a8650c26-1193-46f2-ab6f-2f3bc5824114",
+              "required": true,
+              "examples": [
+                "u001"
+              ],
+              "error": {}
+            },
+            {
+              "code": "",
+              "name": "firstName",
+              "isActivated": true,
+              "type": "string",
+              "properties": [],
+              "primaryKey": false,
+              "GUID": "78316465-e5dd-4bc1-91df-0ebf21fa5d05",
+              "required": true,
+              "examples": [
+                "Abdul"
+              ],
+              "error": {}
+            },
+            {
+              "code": "",
+              "name": "lastName",
+              "isActivated": true,
+              "type": "string",
+              "properties": [],
+              "primaryKey": false,
+              "GUID": "f774957f-ab0a-4d24-9f8a-79fca9678ece",
+              "required": true,
+              "examples": [
+                "Ali"
+              ],
+              "error": {}
+            },
+            {
+              "code": "",
+              "name": "profileImage",
+              "isActivated": true,
+              "type": "string",
+              "properties": [],
+              "primaryKey": false,
+              "GUID": "b576c582-33a8-400c-ab45-9ae48b03b583",
+              "required": true,
+              "examples": [
+                "https://.../some-image.jpg"
+              ],
+              "error": {}
+            }
+          ],
+          "additionalProperties": true,
+          "primaryKey": false,
+          "GUID": "e8b61a06-c9c0-4474-96df-79b0b4d5cf4c",
+          "required": true,
+          "error": {}
+        },
+        {
+          "code": "",
+          "name": "date",
+          "isActivated": true,
+          "type": "string",
+          "properties": [],
+          "primaryKey": false,
+          "GUID": "2fa897d7-0a37-4eee-930b-d90f0e0fb712",
+          "required": true,
+          "examples": [
+            "2025-09-02T18:20:00Z"
+          ],
+          "error": {}
+        },
+        {
+          "code": "",
+          "name": "exercises",
+          "isActivated": true,
+          "type": "array",
+          "properties": [
+            {
+              "hackoladeMeta": {},
+              "isActivated": true,
+              "type": "document",
+              "properties": [
+                {
+                  "code": "",
+                  "name": "name",
+                  "isActivated": true,
+                  "type": "string",
+                  "properties": [],
+                  "primaryKey": false,
+                  "GUID": "95e826ab-ebb3-43d3-8cd0-d9cb018f0685",
+                  "required": true,
+                  "examples": [
+                    "Air Bike"
+                  ],
+                  "error": {}
+                },
+                {
+                  "code": "",
+                  "name": "type",
+                  "isActivated": true,
+                  "type": "string",
+                  "properties": [],
+                  "primaryKey": false,
+                  "GUID": "430e1e98-92dd-41f1-9424-f26d435a8146",
+                  "required": true,
+                  "examples": [
+                    "cardio"
+                  ],
+                  "error": {}
+                },
+                {
+                  "code": "",
+                  "name": "sets",
+                  "isActivated": true,
+                  "type": "array",
+                  "properties": [
+                    {
+                      "hackoladeMeta": {},
+                      "isActivated": true,
+                      "type": "document",
+                      "properties": [
+                        {
+                          "code": "",
+                          "name": "reps",
+                          "isActivated": true,
+                          "type": "integer",
+                          "properties": [],
+                          "primaryKey": false,
+                          "GUID": "f26150d9-aa3f-49c1-8335-612aaf2a750a",
+                          "required": true,
+                          "examples": [
+                            5
+                          ],
+                          "error": {}
+                        },
+                        {
+                          "code": "",
+                          "name": "weightKg",
+                          "isActivated": true,
+                          "type": "integer",
+                          "properties": [],
+                          "primaryKey": false,
+                          "GUID": "2fbada88-a66e-497a-a037-ce0fcdb817b4",
+                          "required": true,
+                          "examples": [
+                            70
+                          ],
+                          "error": {}
+                        }
+                      ],
+                      "additionalProperties": true,
+                      "GUID": "8d9610aa-0879-48d3-9462-2014d2e31a16",
+                      "arrayItem": true,
+                      "error": {}
+                    }
+                  ],
+                  "additionalItems": true,
+                  "primaryKey": false,
+                  "GUID": "d4b85d21-203b-4687-8250-9cfb572df7c4",
+                  "required": false,
+                  "error": {}
+                },
+                {
+                  "code": "",
+                  "name": "durationMin",
+                  "isActivated": true,
+                  "type": "integer",
+                  "properties": [],
+                  "primaryKey": false,
+                  "GUID": "eece8467-8e23-4b77-9456-c084e6f9d610",
+                  "required": false,
+                  "examples": [
+                    10
+                  ],
+                  "error": {}
+                }
+              ],
+              "additionalProperties": true,
+              "GUID": "ad3a2c15-55d4-40f9-9ad3-70be93416787",
+              "arrayItem": true,
+              "error": {}
+            }
+          ],
+          "additionalItems": true,
+          "primaryKey": false,
+          "GUID": "805a136b-bd4d-496f-aa2b-50af202dabe0",
+          "required": true,
+          "error": {}
+        },
+        {
+          "code": "",
+          "name": "summary",
+          "isActivated": true,
+          "type": "document",
+          "properties": [
+            {
+              "code": "",
+              "name": "durationMin",
+              "isActivated": true,
+              "type": "integer",
+              "properties": [],
+              "primaryKey": false,
+              "GUID": "249c73ac-2343-4ef9-bc32-59cee61e55cc",
+              "required": true,
+              "examples": [
+                64
+              ],
+              "error": {}
+            },
+            {
+              "code": "",
+              "name": "calories",
+              "isActivated": true,
+              "type": "integer",
+              "properties": [],
+              "primaryKey": false,
+              "GUID": "c8005875-ac7b-48c4-ba41-1891f8ab748f",
+              "required": true,
+              "examples": [
+                520
+              ],
+              "error": {}
+            },
+            {
+              "code": "",
+              "name": "avgHR",
+              "isActivated": true,
+              "type": "integer",
+              "properties": [],
+              "primaryKey": false,
+              "GUID": "5a837649-ed9f-4a2a-bd3e-f86d489c2d19",
+              "required": true,
+              "examples": [
+                136
+              ],
+              "error": {}
+            }
+          ],
+          "additionalProperties": true,
+          "primaryKey": false,
+          "GUID": "d94acfea-d5c5-4ec4-817b-41798def455d",
+          "required": true,
+          "error": {}
+        },
+        {
+          "code": "",
+          "name": "notes",
+          "isActivated": true,
+          "type": "string",
+          "properties": [],
+          "primaryKey": false,
+          "GUID": "ef5c5f12-3798-4cb3-aae9-f189f3c024d5",
+          "required": true,
+          "examples": [
+            "Felt strong on squats; last set close to failure."
+          ],
+          "error": {}
+        },
+        {
+          "code": "",
+          "name": "tags",
+          "isActivated": true,
+          "type": "array",
+          "properties": [
+            {
+              "hackoladeMeta": {},
+              "isActivated": true,
+              "type": "string",
+              "properties": [],
+              "GUID": "832f1f96-34af-44da-b6aa-c3213c84d87c",
+              "arrayItem": true,
+              "error": {}
+            }
+          ],
+          "additionalItems": true,
+          "primaryKey": false,
+          "GUID": "73d31f62-b5d0-4659-9ffa-30379bf4b615",
+          "required": true,
+          "error": {}
+        }
+      ],
+      "definitions": {
+        "type": "definitions",
+        "GUID": "caacc9d0-1f33-42b5-a001-683719db497c",
+        "properties": []
+      },
+      "isActivated": true,
+      "additionalProperties": true,
+      "GUID": "23ba1e34-fb1c-4f7f-ac6b-ac7f8d8c90e2",
+      "code": "",
+      "hackoladeMeta": {
+        "validationErrors": {}
+      },
+      "bucketId": "ba72fc5e-bbaf-43e2-a884-1c9dba0a2ee2"
+    }
+  ],
+  "buckets": [
+    {
+      "name": "gym_sessions",
+      "type": "bucket",
+      "collectionIds": [
+        "23ba1e34-fb1c-4f7f-ac6b-ac7f8d8c90e2"
+      ],
+      "backgroundColor": {
+        "r": 129,
+        "g": 212,
+        "b": 250,
+        "a": 1
+      },
+      "show": true,
+      "isActivated": true,
+      "GUID": "ba72fc5e-bbaf-43e2-a884-1c9dba0a2ee2",
+      "code": "",
+      "hackoladeMeta": {
+        "validationErrors": {}
+      }
+    }
+  ],
+  "views": [],
+  "relationships": [],
+  "users": [],
+  "diagramViews": [],
+  "idToNameHashTable": {
+    "ba72fc5e-bbaf-43e2-a884-1c9dba0a2ee2": "gym_sessions",
+    "e8b61a06-c9c0-4474-96df-79b0b4d5cf4c": "user",
+    "a8650c26-1193-46f2-ab6f-2f3bc5824114": "userId",
+    "78316465-e5dd-4bc1-91df-0ebf21fa5d05": "firstName",
+    "f774957f-ab0a-4d24-9f8a-79fca9678ece": "lastName",
+    "b576c582-33a8-400c-ab45-9ae48b03b583": "profileImage",
+    "2fa897d7-0a37-4eee-930b-d90f0e0fb712": "date",
+    "805a136b-bd4d-496f-aa2b-50af202dabe0": "exercises",
+    "95e826ab-ebb3-43d3-8cd0-d9cb018f0685": "name",
+    "430e1e98-92dd-41f1-9424-f26d435a8146": "type",
+    "d4b85d21-203b-4687-8250-9cfb572df7c4": "sets",
+    "f26150d9-aa3f-49c1-8335-612aaf2a750a": "reps",
+    "2fbada88-a66e-497a-a037-ce0fcdb817b4": "weightKg",
+    "eece8467-8e23-4b77-9456-c084e6f9d610": "durationMin",
+    "d94acfea-d5c5-4ec4-817b-41798def455d": "summary",
+    "249c73ac-2343-4ef9-bc32-59cee61e55cc": "durationMin",
+    "c8005875-ac7b-48c4-ba41-1891f8ab748f": "calories",
+    "5a837649-ed9f-4a2a-bd3e-f86d489c2d19": "avgHR",
+    "ef5c5f12-3798-4cb3-aae9-f189f3c024d5": "notes",
+    "73d31f62-b5d0-4659-9ffa-30379bf4b615": "tags",
+    "23ba1e34-fb1c-4f7f-ac6b-ac7f8d8c90e2": "gym_sessions"
+  },
+  "definitions": {
+    "type": "definitions",
+    "properties": [],
+    "GUID": "3d218686-1a2f-4da9-acb2-ad137d97a615"
+  },
+  "polyglotDefinitions": {
+    "type": "polyglotDefinitions",
+    "properties": [],
+    "GUID": "67550720-f235-49ae-85af-977a601e9925"
+  },
+  "externalDefinitions": {
+    "type": "externalDefinitions",
+    "properties": [],
+    "GUID": "fe06d435-2d4d-4679-a9db-20e463b7ef5a"
+  },
+  "sources": [],
+  "decorativeSymbols": [],
+  "dbVendor": "JSON",
+  "dbVersion": "2019-09",
+  "appTarget": "JSON",
+  "creationTS": "2025-09-21T18:31:31.406Z",
+  "GUID": "a7ab34ab-df61-4384-b373-627e16331f92",
+  "isLineageEnabled": false,
+  "lastModifTS": "2025-09-21T18:32:53.988Z",
+  "persistenceSchemaVersion": "8",
+  "isCreatedByPlugin": true,
+  "pluginInformation": {
+    "pluginEngineVersion": "1.0.0"
+  },
+  "applicationInformation": {
+    "version": "8.4.3"
+  },
+  "settings": {
+    "centralPane": {
+      "dbLevel": {
+        "erd": [
+          {
+            "GUID": "23ba1e34-fb1c-4f7f-ac6b-ac7f8d8c90e2",
+            "x": 1064,
+            "y": 1064,
+            "width": 268,
+            "height": 425,
+            "color": {}
+          }
+        ],
+        "erdDefinitions": {
+          "erd": [],
+          "rootPath": [],
+          "entities": [],
+          "decorativeSymbols": []
+        },
+        "buckets": [
+          {
+            "x": 1000,
+            "y": 1000,
+            "GUID": "ba72fc5e-bbaf-43e2-a884-1c9dba0a2ee2"
+          }
+        ],
+        "collapsedNodes": [],
+        "activeRelationship": "",
+        "activeRelationshipFields": {
+          "childField": [],
+          "parentField": []
+        },
+        "selectedCollections": [],
+        "displayColorPicker": false,
+        "graphView": {
+          "erd": [],
+          "buckets": [],
+          "decorativeSymbols": [],
+          "forceLayout": true,
+          "defaultLinkLength": 300
+        },
+        "diagramViews": [],
+        "decorativeSymbols": [],
+        "nestedCollectionsLayout": "horizontal",
+        "options": [],
+        "relationshipUpdateDisabled": false
+      },
+      "collectionLevel": {},
+      "changed": false
+    },
+    "dtDiagram": {
+      "collapsedNodes": [],
+      "shouldDistributeCollections": false
+    }
+  }
+}
