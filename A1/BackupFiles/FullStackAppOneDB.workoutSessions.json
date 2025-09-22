@@ -1,0 +1,285 @@
+[{
+  "_id": {
+    "$oid": "68d1c0b3754c0d8e408d11dd"
+  },
+  "user": {
+    "userId": "u002",
+    "firstName": "Maya",
+    "lastName": "Khan",
+    "profileImage": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=60"
+  },
+  "date": "2025-09-05T07:15:00Z",
+  "exercises": [
+    {
+      "name": "Bench Press",
+      "type": "strength",
+      "sets": 4,
+      "reps": [
+        8,
+        8,
+        6,
+        6
+      ],
+      "weightKg": [
+        40,
+        42.5,
+        45,
+        45
+      ]
+    },
+    {
+      "name": "Incline Dumbbell Press",
+      "type": "strength",
+      "sets": 3,
+      "reps": [
+        12,
+        10,
+        10
+      ],
+      "weightKg": [
+        17.5,
+        20,
+        20
+      ]
+    },
+    {
+      "name": "RowErg",
+      "type": "cardio",
+      "durationMin": 8,
+      "avgWatt": 160
+    }
+  ],
+  "summary": {
+    "durationMin": 58,
+    "calories": 470,
+    "avgHR": 132
+  },
+  "notes": "Solid upper-body session; kept rest under 2 min.",
+  "tags": [
+    "upper-body",
+    "strength",
+    "pressing"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68d1c0b3754c0d8e408d11de"
+  },
+  "user": {
+    "userId": "u003",
+    "firstName": "Ethan",
+    "lastName": "Park",
+    "profileImage": "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=300&q=60"
+  },
+  "date": "2025-09-08T18:40:00Z",
+  "exercises": [
+    {
+      "name": "Deadlift",
+      "type": "strength",
+      "sets": 5,
+      "reps": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "weightKg": [
+        100,
+        105,
+        110,
+        110,
+        110
+      ]
+    },
+    {
+      "name": "Barbell Row",
+      "type": "strength",
+      "sets": 4,
+      "reps": [
+        10,
+        10,
+        8,
+        8
+      ],
+      "weightKg": [
+        45,
+        45,
+        50,
+        50
+      ]
+    },
+    {
+      "name": "Hanging Leg Raise",
+      "type": "core",
+      "sets": 3,
+      "reps": [
+        12,
+        12,
+        10
+      ]
+    }
+  ],
+  "summary": {
+    "durationMin": 70,
+    "calories": 560,
+    "avgHR": 140
+  },
+  "notes": "Great hip drive on DL; minor grip fatigue.",
+  "tags": [
+    "posterior-chain",
+    "strength"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68d1c0b3754c0d8e408d11df"
+  },
+  "user": {
+    "userId": "u004",
+    "firstName": "Noor",
+    "lastName": "Hassan",
+    "profileImage": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=300&q=60"
+  },
+  "date": "2025-09-11T06:50:00Z",
+  "exercises": [
+    {
+      "name": "Outdoor Run",
+      "type": "cardio",
+      "durationMin": 30,
+      "distanceKm": 5.6
+    },
+    {
+      "name": "Plank",
+      "type": "core",
+      "sets": 3,
+      "durationSec": [
+        60,
+        60,
+        45
+      ]
+    }
+  ],
+  "summary": {
+    "durationMin": 45,
+    "calories": 380,
+    "avgHR": 142
+  },
+  "notes": "Negative splits; cool morning helped.",
+  "tags": [
+    "cardio",
+    "endurance"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68d1c0b3754c0d8e408d11e0"
+  },
+  "user": {
+    "userId": "u005",
+    "firstName": "Lucas",
+    "lastName": "Silva",
+    "profileImage": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=60"
+  },
+  "date": "2025-09-15T17:25:00Z",
+  "exercises": [
+    {
+      "name": "Back Squat",
+      "type": "strength",
+      "sets": 4,
+      "reps": [
+        5,
+        5,
+        5,
+        3
+      ],
+      "weightKg": [
+        80,
+        85,
+        90,
+        95
+      ]
+    },
+    {
+      "name": "Walking Lunge",
+      "type": "strength",
+      "sets": 3,
+      "reps": [
+        12,
+        12,
+        10
+      ],
+      "weightKg": [
+        22.5,
+        22.5,
+        25
+      ]
+    },
+    {
+      "name": "Treadmill Walk",
+      "type": "cardio",
+      "durationMin": 12,
+      "inclinePct": 10,
+      "speedKph": 5
+    }
+  ],
+  "summary": {
+    "durationMin": 62,
+    "calories": 500,
+    "avgHR": 138
+  },
+  "notes": "Focused on depth and bracing; slight quad fatigue.",
+  "tags": [
+    "lower-body",
+    "strength",
+    "conditioning"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68d1c0b3754c0d8e408d11e1"
+  },
+  "user": {
+    "userId": "u001",
+    "firstName": "Abdul",
+    "lastName": "Ali",
+    "profileImage": "https://.../some-image.jpg"
+  },
+  "date": "2025-09-02T18:20:00Z",
+  "exercises": [
+    {
+      "name": "Back Squat",
+      "type": "strength",
+      "sets": [
+        {
+          "reps": 5,
+          "weightKg": 70
+        },
+        {
+          "reps": 5,
+          "weightKg": 70
+        },
+        {
+          "reps": 5,
+          "weightKg": 70
+        }
+      ]
+    },
+    {
+      "name": "Air Bike",
+      "type": "cardio",
+      "durationMin": 10
+    }
+  ],
+  "summary": {
+    "durationMin": 64,
+    "calories": 520,
+    "avgHR": 136
+  },
+  "notes": "Felt strong on squats; last set close to failure.",
+  "tags": [
+    "strength",
+    "lower-body",
+    "hypertrophy"
+  ]
+}]
