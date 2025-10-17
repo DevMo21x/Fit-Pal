@@ -1,6 +1,5 @@
 import express from 'express';
-import Event from '../Models/event.js';
-import event from '../Models/event.js';
+import Event from '../../Models/event.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
