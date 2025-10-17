@@ -1,7 +1,6 @@
 [
   {
     "user": {
-      "userId": "u002",
       "firstName": "Maya",
       "lastName": "Khan",
       "profileImage": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=60"
@@ -39,7 +38,6 @@
   },
   {
     "user": {
-      "userId": "u003",
       "firstName": "Ethan",
       "lastName": "Park",
       "profileImage": "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=300&q=60"
@@ -77,7 +75,6 @@
   },
   {
     "user": {
-      "userId": "u004",
       "firstName": "Noor",
       "lastName": "Hassan",
       "profileImage": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=300&q=60"
@@ -107,7 +104,6 @@
   },
   {
     "user": {
-      "userId": "u005",
       "firstName": "Lucas",
       "lastName": "Silva",
       "profileImage": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=60"
@@ -146,7 +142,6 @@
   },
   {
     "user": {
-      "userId": "u001",
       "firstName": "Abdul",
       "lastName": "Ali",
       "profileImage": "https://.../some-image.jpg"
