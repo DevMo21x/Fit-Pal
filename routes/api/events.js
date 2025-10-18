@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
 
   let events;
   try {
-    events = await Event.find().exec;
+    events = await Event.find().exec();
   } catch (error) {
     res.status(500).send('Internal Server Error');
   }
