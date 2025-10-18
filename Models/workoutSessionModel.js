@@ -17,7 +17,13 @@ const eventSchema = new mongoose.Schema({
       weightKG: { type: [Number] },
     },
   ],
-  summary: { type: String },
+  summary: [
+    {
+      duration: {type: Number},
+      calories: {type: Number},
+      avgHR: {type: Number}
+    }
+  ],
   notes: { type: String },
   tags: { type: [String] },
 });

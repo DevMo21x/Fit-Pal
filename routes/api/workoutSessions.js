@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
 
 // Create a new Workout Record
 router.post('/', async (req, res) => {
-  const newWorkout = new Event(req.body);
+  const newWorkout = new workoutSession(req.body);
 
   try {
     const newRecord = await newWorkout.save();
@@ -58,7 +58,7 @@ router.put('/:id', async (req, res) => {
     if (!foundEvent) {
       return res.status(404).send('Record not found !');
     }
-    res.status(204).send();
+    res.status(200).send("Record Updated!");
   } catch (error) {
     return res.status(500).send('Internal Server Error, try again later !');
   }
