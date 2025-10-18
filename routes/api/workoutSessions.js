@@ -49,9 +49,33 @@ router.post('/', async (req, res) => {
 // Update Record
 router.put('/:id', async (req, res) => {
   try {
-    await workoutSession.findByIdAndUpdate(req.params.id, req.body, {runValidators: true}).exec();
+    const foundEvent = await workoutSession
+      .findByIdAndUpdate(req.params.id, req.body, {
+        runValidators: true,
+        new: true,
+      })
+      .exec();
+    if (!foundEvent) {
+      return res.status(404).send('Record not found !');
+    }
+    res.status(204).send();
   } catch (error) {
-    res.status(500).send('Internal Server Error, try again later !');
+    return res.status(500).send('Internal Server Error, try again later !');
+  }
+});
+
+// Delete a record from the db
+router.delete('/:id', async (req, res) => {
+  try {
+    const foundDeleteRec = await workoutSession
+      .findByIdAndDelete(req.params.id)
+      .exec();
+    if (!foundDeleteRec) {
+      return res.status(404).send('Record not found !');
+    }
+    res.status(204).end();
+  } catch (error) {
+    return res.status(500).send('Internal Server Error, try again later !');
   }
 });
 
