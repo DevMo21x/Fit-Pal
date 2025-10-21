@@ -24,7 +24,6 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-        
         const hashedPassword = bcrypt.hashSync(password, 10);
         const newUser = new User({
             ...req.body,
@@ -44,24 +43,40 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// router.post('/login', async (req, res) => {
-//     res.send(req.body);
+router.post('/login', async (req, res) => {
+    // Validate the payload from the post
 
-//     // Validate the payload from the post
+    try {
+        await login.validate(req.body);
+        const { email, password } = req.body;
+        const user = await User.findOne({ email }).exec();
+        if (!user) {
+            return res.status(404).send();
+        }
 
-//     try {
-//         await login.validate(req.body);
+        const isMatch = await bcrypt.compare(password, user.password);
 
-//         // attempt to find an existing record with the submitted email (findOne)
-//         const user = User.findOne(req.body).exec();
-//     } catch (error) {
-//         if (error.name === 'validationError') {
-//             return res.status(422).json(error.errors);
-//         }
-//         return res.status(500).send();
-//     }
+        if (!isMatch) {
+            return res.status(401).json({
+                message: 'Incorrect password!',
+            });
+        }
 
-//     res.send('PlaceHolder');
-// });
+        const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET);
+
+        res.setHeader('x-auth-token', token);
+
+        res.status(200).json({
+            message: 'Login successful!',
+            email: user.email,
+            id: user._id,
+        });
+    } catch (error) {
+        if (error.name === 'validationError') {
+            return res.status(422).json(error.errors);
+        }
+        return res.status(500).send();
+    }
+});
 
 export default router;
