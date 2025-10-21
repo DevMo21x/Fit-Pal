@@ -10,4 +10,4 @@ const userSchema = new mongoose.Schema(
     { versionKey: false, timestamps: true },
 );
 
-export default new mongoose.model('User', userSchema);
+export default  mongoose.model('User', userSchema);
