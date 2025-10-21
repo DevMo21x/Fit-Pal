@@ -7,10 +7,7 @@ const router = express.Router();
 router.use("/events", eventsRouter);
 router.use("/users", usersRouter);
 router.use("/workouts", workoutRouter);
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+
 
 router.get("/", (req, res) => {
   res.send("Welcome to the API");
