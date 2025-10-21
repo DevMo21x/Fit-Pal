@@ -4,23 +4,31 @@ import mongoose from 'mongoose';
 const eventSchema = new mongoose.Schema(
     {
         user: {
-            firstName: { type: String },
-            lastName: { type: String },
-            profileImage: { type: String },
+            firstName: {
+                type: String,
+                required: true,
+            },
+            lastName: {
+                type: String,
+                required: true,
+            },
+            profileImage: {
+                type: String,
+            },
         },
         date: { type: String },
         exercises: [
             {
-                name: { type: String },
-                type: { type: String },
-                sets: { type: Number },
-                reps: { type: [Number] },
-                weightKG: { type: [Number] },
+                name: { type: String, required: true },
+                type: { type: String, required: true },
+                sets: { type: Number, required: true },
+                reps: { type: [Number], required: true },
+                weightKG: { type: [Number], required: true },
             },
         ],
         summary: [
             {
-                duration: { type: Number },
+                duration: { type: Number, required: true },
                 calories: { type: Number },
                 avgHR: { type: Number },
             },

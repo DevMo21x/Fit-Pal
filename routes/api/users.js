@@ -1,4 +1,6 @@
 import express from 'express';
+import { passwordStrength } from 'check-password-strength';
+import bcrypt from 'bcrypt';
 import User from '../../Models/user.js';
 import login from '../../Models/login.js';
 const router = express.Router();
@@ -9,29 +11,57 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/register', async (req, res) => {
-    res.send(req.body);
-    // make sure the email doesn't already exist
-});
+    // Grabbing the password property from the req.body object
+    const { password } = req.body;
+    const strength = passwordStrength(password);
 
-
-router.post('/login', async (req, res) => {
-    res.send(req.body);
-
-    // Validate the payload from the post
+    if (strength.id <= 1) {
+        return res.status(422).json({
+            error: 'Password does not meet the requirements.',
+            requirements:
+                'Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character.',
+        });
+    }
 
     try {
-        await login.validate(req.body);
+        
+        const hashedPassword = bcrypt.hashSync(password, 10);
+        const newUser = new User({
+            ...req.body,
+            password: hashedPassword,
+        });
 
-        // attempt to find an existing record with the submitted email (findOne)
-        const user = User.findOne(req.body).exec();
+        await newUser.save();
+        res.status(201).json({
+            email: newUser.email,
+            id: newUser._id,
+        });
     } catch (error) {
-        if (error.name === 'validationError') {
+        if (error.name === 'ValidationError') {
             return res.status(422).json(error.errors);
         }
         return res.status(500).send();
     }
-
-    res.send('PlaceHolder');
 });
+
+// router.post('/login', async (req, res) => {
+//     res.send(req.body);
+
+//     // Validate the payload from the post
+
+//     try {
+//         await login.validate(req.body);
+
+//         // attempt to find an existing record with the submitted email (findOne)
+//         const user = User.findOne(req.body).exec();
+//     } catch (error) {
+//         if (error.name === 'validationError') {
+//             return res.status(422).json(error.errors);
+//         }
+//         return res.status(500).send();
+//     }
+
+//     res.send('PlaceHolder');
+// });
 
 export default router;
