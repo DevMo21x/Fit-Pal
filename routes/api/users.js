@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
         const hashedPassword = bcrypt.hashSync(password, 10);
         const newUser = new User({
             ...req.body,
-            password: hashedPassword,
+            password: hashedPassword, // Override the password with the hashed password!
         });
 
         await newUser.save();
@@ -72,7 +72,7 @@ router.post('/login', async (req, res) => {
             id: user._id,
         });
     } catch (error) {
-        if (error.name === 'validationError') {
+        if (error.name === 'ValidationError') {
             return res.status(422).json(error.errors);
         }
         return res.status(500).send();
