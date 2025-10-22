@@ -3,6 +3,7 @@ import { passwordStrength } from 'check-password-strength';
 import bcrypt from 'bcrypt';
 import User from '../../Models/user.js';
 import login from '../../Models/login.js';
+import jwt from 'jsonwebtoken';
 const router = express.Router();
 
 /* GET users listing. */
