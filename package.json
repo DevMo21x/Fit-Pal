@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "check-password-strength": "^3.0.0",
     "cookie-parser": "~1.4.4",
     "dotenv": "^17.2.3",
     "express": "~4.16.1",
