@@ -1,5 +1,5 @@
 import e from "express";
-import checkToken from "./Middleware/checkToken.js";
+import checkToken from '../../Middleware/checkToken.js';
 import workoutSession from "../../Models/workoutSessionModel.js";
 const router = e.Router();
 // router.use(checkToken);
