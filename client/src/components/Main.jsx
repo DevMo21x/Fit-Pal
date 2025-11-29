@@ -4,13 +4,18 @@ import { useQuery } from "@tanstack/react-query";
 import Card from "./Card.jsx";
 
 const Main = () => {
-  const { data, isPending, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["workouts"],
-    queryFn: () =>
-      fetch("http://localhost:3000/api/workoutSessions").then((r) => r.json()),
+    queryFn: async () => {
+      const response = await fetch("http://localhost:3000/api/workouts");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    },
   });
 
-  if (isPending)
+  if (isLoading)
     return (
       <div className="container mt-5">
         <span>Loading...</span>
