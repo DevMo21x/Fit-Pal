@@ -6,7 +6,7 @@ import logger from "morgan";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import cors from 'cors';
+import cors from "cors";
 
 import indexRouter from "./routes/index.js";
 import apiRouter from "./routes/api/index.js";
@@ -24,7 +24,12 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

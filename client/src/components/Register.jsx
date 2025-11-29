@@ -1,24 +1,41 @@
 import "../css/signin.css";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { json } from "express";
 const Register = (props) => {
   const { register, handleSubmit } = useForm();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   // Send the data to the login endpoint
   const onSubmit = (data) => {
-    console.log(data);
+    mutation.mutate(data);
   };
 
   //create our mutation to communicate to the API
-  const mutation = useMutation(function (registerData) {
-    fetch("http://localhost:3000/api/users/register", {
-      method: "POST",
-      body: JSON.stringify(registerData),
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => res.json)
-      .then((json) => console.log(json));
+  const mutation = useMutation({
+    mutationFn: async (loginData) => {
+      const res = await fetch("http://localhost:3000/api/users/register", {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify(loginData),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      if (!res.ok) throw new Error("Register unsuccessful");
+      return await res.json();
+    },
+    onSuccess: (responseBody) => {
+      console.log("Registered!", responseBody);
+
+      // cookie has been set...token is available
+
+      // redirect to the home page/route
+      navigate("/");
+    },
+    onError: (err) => {
+      console.error("Unable to register!", err.message);
+    },
   });
   return (
     <form className="form-signin" onSubmit={handleSubmit(onSubmit)}>
@@ -54,7 +71,7 @@ const Register = (props) => {
         className="form-control"
         placeholder="Email address"
         autoFocus
-        {...register("email", { required: true })} 
+        {...register("email", { required: true })}
       />
 
       <label htmlFor="inputPassword" className="sr-only">
@@ -70,6 +87,11 @@ const Register = (props) => {
       <button className="btn btn-lg btn-primary btn-block" type="submit">
         Register
       </button>
+      {
+        mutation.error && (
+          <p className="text-danger">Invalid info, try again.</p>
+        )
+      }
     </form>
   );
 };

@@ -37,7 +37,14 @@ router.post("/register", async (req, res) => {
       { id: newUser._id, email: newUser.email },
       process.env.JWT_SECRET
     );
-    res.setHeader("x-auth-token", token);
+    
+    // res.setHeader("x-auth-token", token);
+
+    // sending the signed token with httpOnly cookie
+    res.cookie("JWT", token, {
+      httpOnly: true,
+      path: "/",
+    });
 
     res.status(201).json({
       email: newUser.email,
@@ -59,6 +66,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email }).exec();
     if (!user) {
+      // if user not found send back a 404 not found!
       return res.status(404).send();
     }
 
@@ -75,12 +83,17 @@ router.post("/login", async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    res.setHeader("x-auth-token", token);
+    // sending singed token with custom header
+    // res.setHeader("x-auth-token", token);
+
+    // sending the token in a http only cookie
+    res.cookie("JWT", token, {
+      httpOnly: true,
+      path: "/",
+    });
 
     res.status(200).json({
-      message: "Login successful!",
       email: user.email,
-      id: user._id,
     });
   } catch (error) {
     if (error.name === "ValidationError") {

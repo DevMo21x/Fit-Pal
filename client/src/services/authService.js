@@ -7,7 +7,7 @@ export const signOut = async () => {
   sessionStorage.removeItem("authenticated");
 
   //remove the httpOnly jwt cookie
-  fetchOptions = {
+  const fetchOptions = {
     method: "POST",
     credentials: "include",
   };

@@ -7,7 +7,7 @@ const Main = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["workouts"],
     queryFn: () =>
-      fetch("http://localhost:3000/api/workouts").then((r) => r.json()),
+      fetch("http://localhost:3000/api/workoutSessions").then((r) => r.json()),
   });
 
   if (isPending)
