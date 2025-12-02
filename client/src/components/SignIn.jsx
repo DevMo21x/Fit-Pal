@@ -30,7 +30,8 @@ const SignIn = (props) => {
       console.log("Login Success!", responseBody);
 
       // cookie has been set...token is available
-
+      sessionStorage.setItem('authenticated', true);
+      // sessionStorage.setItem('user', response.body.email);
       // redirect to the home page/route
       navigate("/");
     },

@@ -16,3 +16,7 @@ export const signOut = async () => {
     fetchOptions
   );
 };
+
+export const currentAuthenticatedUser = ()=> {
+    return sessionStorage.getItem('user');
+}

@@ -21,7 +21,10 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       {
         element: <ProtectedRoutes />,
-        children: [{ path: "dummy", element: <Dummy /> }],
+        children: [
+          { path: "dummy", element: <Dummy /> },
+          // { path: "workout/create", element: <Create /> },
+        ],
       },
     ],
   },
