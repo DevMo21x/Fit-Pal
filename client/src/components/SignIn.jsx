@@ -3,7 +3,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 const SignIn = (props) => {
-  const { register, handleSubmit } = useForm();
+  // getting the functions and objects form the useForm object for validation and mutation
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -30,7 +36,7 @@ const SignIn = (props) => {
       console.log("Login Success!", responseBody);
 
       // cookie has been set...token is available
-      sessionStorage.setItem('authenticated', true);
+      sessionStorage.setItem("authenticated", true);
       // sessionStorage.setItem('user', response.body.email);
       // redirect to the home page/route
       navigate("/");
@@ -52,8 +58,19 @@ const SignIn = (props) => {
         className="form-control"
         placeholder="Email address"
         autoFocus
-        {...register("email", { required: true })}
+        {...register("email", {
+          required: "Email is required",
+          pattern: {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: "Email must be valid",
+          },
+        })}
       />
+
+      {/* Displaying an error message for the email input */}
+      {errors.email && (
+        <p className="text text-danger"> {errors.email.message}</p>
+      )}
       <label htmlFor="inputPassword" className="sr-only">
         Password
       </label>

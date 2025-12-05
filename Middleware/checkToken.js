@@ -6,7 +6,7 @@ const checkToken = (req, res, next) => {
   try {
     // check the validity of jwt
     // jwt.verify(token, process.env.JWT_SECRET);
-    jwt.verify(req.cookie.jwt, process.env.JWT_SECRET())
+    jwt.verify(req.cookies.JWT, process.env.JWT_SECRET)
     next();
   } catch (error) {
     // token not valid

@@ -1,37 +1,39 @@
 import "../css/signin.css";
 import { useForm } from "react-hook-form";
-import { passwordStrength } from "check-password-strength";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-const Register = (props) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+const Create = (props) => {
+  const { register, handleSubmit } = useForm();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   // Send the data to the login endpoint
-  const onSubmit = (data) => {
-    mutation.mutate(data);
+  const onSubmit = ({ firstName, lastName }) => {
+    const newRecord = {
+      user: {
+        firstName,
+        lastName
+      },
+    };
+
+    mutation.mutate(newRecord);
   };
 
   //create our mutation to communicate to the API
   const mutation = useMutation({
-    mutationFn: async (loginData) => {
-      const res = await fetch("http://localhost:3000/api/users/register", {
+    mutationFn: async (newRecordData) => {
+      const res = await fetch("http://localhost:3000/api/workouts/", {
         credentials: "include",
         method: "POST",
-        body: JSON.stringify(loginData),
+        body: JSON.stringify(newRecordData),
         headers: {
           "content-type": "application/json",
         },
       });
-      if (!res.ok) throw new Error("Register unsuccessful");
+      if (!res.ok) throw new Error("Unable to create a new record!");
       return await res.json();
     },
     onSuccess: (responseBody) => {
-      console.log("Registered!", responseBody);
+      console.log("Created!", responseBody);
 
       // cookie has been set...token is available
 
@@ -39,12 +41,14 @@ const Register = (props) => {
       navigate("/");
     },
     onError: (err) => {
-      console.error("Unable to register!", err.message);
+      console.error("Unable to create!", err.message);
     },
   });
   return (
     <form className="form-signin" onSubmit={handleSubmit(onSubmit)}>
-      <h1 className="h3 mb-3 font-weight-normal text-center">Register</h1>
+      <h1 className="h3 mb-3 font-weight-normal text-center">
+        Create a new record{" "}
+      </h1>
       <label htmlFor="inputFirstName" className="sr-only">
         First Name:
       </label>
@@ -67,42 +71,8 @@ const Register = (props) => {
         {...register("lastName", { required: true })}
       />
 
-      <label htmlFor="inputEmail" className="sr-only">
-        Email address
-      </label>
-      <input
-        type="text"
-        id="inputEmail"
-        className="form-control"
-        placeholder="Email address"
-        autoFocus
-        {...register("email", { required: true })}
-      />
-
-      <label htmlFor="inputPassword" className="sr-only">
-        Password
-      </label>
-      <input
-        type="password"
-        id="inputPassword"
-        className="form-control"
-        placeholder="Password"
-        {...register("password", {
-          required: "Password is required",
-          validate: (password) => {
-            if (passwordStrength(password).value === "Medium") {
-              return true;
-            } else {
-              return "Password not strong enough!";
-            }
-          },
-        })}
-      />
-      {errors.password && (
-        <p className="text-danger">{errors.password.message}</p>
-      )}
       <button className="btn btn-lg btn-primary btn-block" type="submit">
-        Register
+        Create
       </button>
       {mutation.error && (
         <p className="text-danger">Invalid info, try again.</p>
@@ -111,4 +81,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default Create;

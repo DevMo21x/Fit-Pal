@@ -41,8 +41,8 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarsExample07">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <Link className="nav-link" to="/#">
-                Create new record <span className="sr-only">(current)</span>
+              <Link className="nav-link" to="/create">
+                Create new record
               </Link>
             </li>
           </ul>

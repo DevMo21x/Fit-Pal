@@ -4,6 +4,9 @@ const Card = ({ item }) => {
     Math.random() * 1000
   )}`;
 
+  // User profile image
+  const userImage = item.user.profileImage;
+
   return (
     <div className="col-md-4">
       <div className="card mb-4 box-shadow">
