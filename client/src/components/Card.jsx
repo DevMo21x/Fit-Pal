@@ -1,26 +1,130 @@
 const Card = ({ item }) => {
-  // Generate a random image URL using Lorem Picsum
+  // User profile image with fallback
+  const userImage =
+    item.user?.profileImage ||
+    `https://picsum.photos/50/50?random=${Math.floor(Math.random() * 1000)}`;
+
+  // Random workout image
   const randomImageUrl = `https://picsum.photos/382/225?random=${Math.floor(
     Math.random() * 1000
   )}`;
 
-  // User profile image
-  const userImage = item.user.profileImage;
+  // Format date
+  const formattedDate = item.date
+    ? new Date(item.date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : "No date";
+
+  // Get summary data (handle both array and object formats)
+  const summary = Array.isArray(item.summary) ? item.summary[0] : item.summary;
 
   return (
     <div className="col-md-4">
       <div className="card mb-4 box-shadow">
         <img
           className="card-img-top"
-          alt="Random Thumbnail"
-          style={{ height: 225, width: "100%", display: "block" }}
+          alt="Workout Thumbnail"
+          style={{
+            height: 225,
+            width: "100%",
+            display: "block",
+            objectFit: "cover",
+          }}
           src={randomImageUrl}
         />
         <div className="card-body">
-          <p className="card-text">
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </p>
+          {/* User Info */}
+          <div className="d-flex align-items-center mb-2">
+            <img
+              src={userImage}
+              alt={`${item.user?.firstName}'s profile`}
+              className="rounded-circle mr-2"
+              style={{ width: 40, height: 40, objectFit: "cover" }}
+              onError={(e) => {
+                e.target.src = `https://ui-avatars.com/api/?name=${item.user?.firstName}+${item.user?.lastName}&background=random`;
+              }}
+            />
+            <div>
+              <strong>
+                {item.user?.firstName} {item.user?.lastName}
+              </strong>
+              <small className="text-muted d-block">{formattedDate}</small>
+            </div>
+          </div>
+
+          {/* Exercises */}
+          <div className="mb-2">
+            <strong>Exercises:</strong>
+            <ul className="list-unstyled mb-0 small">
+              {item.exercises?.slice(0, 3).map((exercise, index) => (
+                <li key={index}>
+                  <i className="fa fa-check text-success mr-1"></i>
+                  {exercise.name}
+                  {exercise.sets && ` - ${exercise.sets} sets`}
+                  {exercise.durationMin && ` - ${exercise.durationMin} min`}
+                </li>
+              ))}
+              {item.exercises?.length > 3 && (
+                <li className="text-muted">
+                  +{item.exercises.length - 3} more
+                </li>
+              )}
+            </ul>
+          </div>
+
+          {/* Summary Stats */}
+          {summary && (
+            <div className="d-flex justify-content-around text-center mb-2 border-top border-bottom py-2">
+              {(summary.durationMin || summary.duration) && (
+                <div>
+                  <small className="text-muted d-block">Duration</small>
+                  <strong>{summary.durationMin || summary.duration} min</strong>
+                </div>
+              )}
+              {summary.calories && (
+                <div>
+                  <small className="text-muted d-block">Calories</small>
+                  <strong>{summary.calories}</strong>
+                </div>
+              )}
+              {summary.avgHR && (
+                <div>
+                  <small className="text-muted d-block">Avg HR</small>
+                  <strong>{summary.avgHR} bpm</strong>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Tags */}
+          {item.tags?.length > 0 && (
+            <div className="mb-2">
+              {item.tags.map((tag, index) => (
+                <span key={index} className="badge badge-secondary mr-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Notes */}
+          {item.notes && (
+            <p
+              className="card-text small text-muted mb-2"
+              style={{ fontStyle: "italic" }}
+            >
+              "
+              {item.notes.length > 80
+                ? item.notes.substring(0, 80) + "..."
+                : item.notes}
+              "
+            </p>
+          )}
+
+          {/* Action Buttons */}
           <div className="d-flex justify-content-between align-items-center">
             <div className="btn-group">
               <button
@@ -35,14 +139,10 @@ const Card = ({ item }) => {
               >
                 Edit
               </button>
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-              >
+              <button type="button" className="btn btn-sm btn-outline-danger">
                 Delete
               </button>
             </div>
-            <small className="text-muted">{item.user.firstName}</small>
           </div>
         </div>
       </div>
