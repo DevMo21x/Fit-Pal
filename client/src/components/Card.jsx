@@ -1,4 +1,7 @@
+import { Link, useNavigate } from "react-router-dom";
+
 const Card = ({ item }) => {
+  useNavigate();
   // User profile image with fallback
   const userImage =
     item.user?.profileImage ||
@@ -133,15 +136,14 @@ const Card = ({ item }) => {
               >
                 View
               </button>
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-              >
+
+              <Link className="btn btn-sm btn-outline-secondary" to="/edit">
                 Edit
-              </button>
-              <button type="button" className="btn btn-sm btn-outline-danger">
+              </Link>
+
+              <Link className="btn btn-sm btn-outline-danger" to="/edit">
                 Delete
-              </button>
+              </Link>
             </div>
           </div>
         </div>

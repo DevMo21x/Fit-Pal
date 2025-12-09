@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import Main from "./components/Main.jsx";
 import SignIn from "./components/SignIn.jsx";
+import EditForm from "./components/EditForm.jsx";
 import Register from "./components/Register.jsx";
 import Create from "./components/CreateForm.jsx";
 import Dummy from "./components/Dummy.jsx";
@@ -22,7 +23,10 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       {
         element: <ProtectedRoutes />,
-        children: [{ path: "create", element: <Create /> }],
+        children: [
+          { path: "create", element: <Create /> },
+          { path: "edit", element: <EditForm /> },
+        ],
       },
     ],
   },

@@ -1,5 +1,5 @@
 import React from "react";
-import { currentAuthenticatedUser, isAuthenticated } from "../services/authService.js";
+import { currentAuthenticatedUser, isAuthenticated, signOut } from "../services/authService.js";
 import { useNavigate, Link } from "react-router-dom";
 const NavBar = () => {
   useNavigate(); // Hack
@@ -62,7 +62,7 @@ const NavBar = () => {
                 <li className="nav-item dropdown">
                   <Link className="nav-link dropdown-toggle active" to="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome {currentAuthenticatedUser()}</Link>
                   <div className="dropdown-menu" aria-labelledby="dropdown07">
-                    <Link className="dropdown-item" to="/#">Signout</Link>
+                    <Link className="dropdown-item" to="/#" onClick={()=>{signOut()}}>Signout</Link>
                   </div>
                 </li>
               )

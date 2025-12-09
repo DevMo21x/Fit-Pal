@@ -2,6 +2,7 @@ import "../css/signin.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { currentAuthenticatedUser } from "../services/authService";
 const SignIn = (props) => {
   // getting the functions and objects form the useForm object for validation and mutation
   const {
@@ -33,10 +34,11 @@ const SignIn = (props) => {
       return await res.json();
     },
     onSuccess: (responseBody) => {
-      console.log("Login Success!", responseBody);
+      const userEmail = responseBody.email;
 
-      // cookie has been set...token is available
+      // Set variable in the session storage
       sessionStorage.setItem("authenticated", true);
+      sessionStorage.setItem("user", userEmail);
       // sessionStorage.setItem('user', response.body.email);
       // redirect to the home page/route
       navigate("/");
