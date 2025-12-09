@@ -1,44 +1,102 @@
 import "../css/signin.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useQuery } from "@tanstack/react-query";
 
 const EditForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   // State for toggling sections
   const [showProfileImage, setShowProfileImage] = useState(false);
   const [showExerciseDetails, setShowExerciseDetails] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Getting the old data to pre-populate the update form
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["workouts"],
-    queryFn: async () => {
-      const response = await fetch("http://localhost:3000/api/workouts/", {
-        credentials: "include",
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Unable to get data from the API");
+  // Fetch and pre-populate form
+  useEffect(() => {
+    const fetchWorkout = async () => {
+      try {
+        setIsLoading(true);
+        const res = await fetch(`http://localhost:3000/api/workouts/${id}`, {
+          credentials: "include",
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        // Prepare data for reset
+        reset({
+          firstName: data.user?.firstName || "",
+          lastName: data.user?.lastName || "",
+          profileImage: data.user?.profileImage || "",
+          date: data.date ? data.date.slice(0, 16) : "",
+          exerciseName: data.exercises?.[0]?.name || "",
+          exerciseType: data.exercises?.[0]?.type || "",
+          sets: data.exercises?.[0]?.sets || "",
+          reps: data.exercises?.[0]?.reps
+            ? data.exercises[0].reps.join(", ")
+            : "",
+          weightKG: data.exercises?.[0]?.weightKG
+            ? data.exercises[0].weightKG.join(", ")
+            : "",
+          duration: data.summary?.[0]?.duration || "",
+          calories: data.summary?.[0]?.calories || "",
+          avgHR: data.summary?.[0]?.avgHR || "",
+          notes: data.notes || "",
+          tags: data.tags ? data.tags.join(", ") : "",
+        });
+
+        // Show sections if data exists
+        setShowProfileImage(!!data.user?.profileImage);
+        setShowExerciseDetails(
+          !!(
+            data.exercises?.[0]?.sets ||
+            data.exercises?.[0]?.reps ||
+            data.exercises?.[0]?.weightKG
+          )
+        );
+        setShowSummary(
+          !!(
+            data.summary?.[0]?.duration ||
+            data.summary?.[0]?.calories ||
+            data.summary?.[0]?.avgHR
+          )
+        );
+        setShowAdditionalInfo(
+          !!(data.notes || (data.tags && data.tags.length))
+        );
+      } catch (error) {
+        console.error("Error fetching workout:", error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
-      // return response.json();
-      const oldData = response.json()
-      return oldData;
-    },
-  });
+    };
+
+    if (id) {
+      fetchWorkout();
+    } else {
+      setIsLoading(false);
+      setError("No workout ID provided");
+    }
+  }, [id, reset]);
 
   const onSubmit = (data) => {
     // Build the record matching the model structure
-    const newRecord = {
+    const updatedRecord = {
       user: {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -65,31 +123,59 @@ const EditForm = () => {
       tags: data.tags ? data.tags.split(",").map((tag) => tag.trim()) : [],
     };
 
-    mutation.mutate(newRecord);
+    mutation.mutate(updatedRecord);
   };
 
   const mutation = useMutation({
-    mutationFn: async (newRecordData) => {
-      const res = await fetch("http://localhost:3000/api/workouts/", {
+    mutationFn: async (updatedRecordData) => {
+      const res = await fetch(`http://localhost:3000/api/workouts/${id}`, {
         credentials: "include",
-        method: "POST",
-        body: JSON.stringify(newRecordData),
+        method: "PUT",
+        body: JSON.stringify(updatedRecordData),
         headers: {
           "content-type": "application/json",
         },
       });
-      if (!res.ok) throw new Error("Unable to create a new record!");
+      if (!res.ok) throw new Error("Unable to update record!");
       return await res.json();
     },
     onSuccess: (responseBody) => {
-      console.log("Created!", responseBody);
+      console.log("Updated!", responseBody);
       queryClient.invalidateQueries(["workouts"]);
       navigate("/");
     },
     onError: (err) => {
-      console.error("Unable to create!", err.message);
+      console.error("Unable to update!", err.message);
     },
   });
+
+  if (isLoading) {
+    return (
+      <div className="container" style={{ maxWidth: 600, paddingTop: 40 }}>
+        <div className="text-center">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+          <p className="mt-2">Loading workout data...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container" style={{ maxWidth: 600, paddingTop: 40 }}>
+        <div className="alert alert-danger" role="alert">
+          <h4 className="alert-heading">Error!</h4>
+          <p>{error}</p>
+          <hr />
+          <button className="btn btn-primary" onClick={() => navigate("/")}>
+            Go Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container" style={{ maxWidth: 600, paddingTop: 40 }}>

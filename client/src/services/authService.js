@@ -17,6 +17,8 @@ export const signOut = async () => {
   );
 };
 
+
+
 export const currentAuthenticatedUser = ()=> {
     return sessionStorage.getItem('user');
 }

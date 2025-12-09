@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           { path: "create", element: <Create /> },
-          { path: "edit", element: <EditForm /> },
+          { path: "edit/:id", element: <EditForm /> },
         ],
       },
     ],

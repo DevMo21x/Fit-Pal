@@ -63,7 +63,9 @@ router.put("/:id", checkToken, async (req, res) => {
     if (!foundEvent) {
       return res.status(404).send("Record not found !");
     }
-    res.status(200).send("Record Updated!");
+    res.status(200).json({
+      message: 'Record Updated!',
+    });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(422).json(error.errors);

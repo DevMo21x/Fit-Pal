@@ -1,7 +1,44 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Card = ({ item }) => {
-  useNavigate();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  // Create mutation for delete
+  const deleteMutation = useMutation({
+    mutationFn: async (id) => {
+      const response = await fetch(`http://localhost:3000/api/workouts/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete workout");
+      }
+      return response;
+    },
+    onSuccess: () => {
+      // Refresh the workout list
+      queryClient.invalidateQueries(["workouts"]);
+      console.log("Workout deleted successfully");
+    },
+    onError: (error) => {
+      console.error("Error deleting record:", error);
+      alert("Failed to delete workout. Please try again.");
+    },
+  });
+
+  const deleteRecord = () => {
+    if (
+      window.confirm("Are you sure you want to delete this workout record?")
+    ) {
+      deleteMutation.mutate(item._id);
+    }
+  };
+
   // User profile image with fallback
   const userImage =
     item.user?.profileImage ||
@@ -137,13 +174,21 @@ const Card = ({ item }) => {
                 View
               </button>
 
-              <Link className="btn btn-sm btn-outline-secondary" to="/edit">
+              <Link
+                className="btn btn-sm btn-outline-secondary"
+                to={`/edit/${item._id}`}
+              >
                 Edit
               </Link>
 
-              <Link className="btn btn-sm btn-outline-danger" to="/edit">
-                Delete
-              </Link>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-danger"
+                onClick={deleteRecord}
+                disabled={deleteMutation.isPending}
+              >
+                {deleteMutation.isPending ? "Deleting..." : "Delete"}
+              </button>
             </div>
           </div>
         </div>
