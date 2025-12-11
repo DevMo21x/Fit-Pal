@@ -90,7 +90,7 @@ const Register = (props) => {
         {...register("password", {
           required: "Password is required",
           validate: (password) => {
-            if (passwordStrength(password).value === "Medium") {
+            if (passwordStrength(password).id >= 1) {
               return true;
             } else {
               return "Password not strong enough!";
