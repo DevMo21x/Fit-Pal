@@ -49,7 +49,7 @@ const Create = () => {
 
   const mutation = useMutation({
     mutationFn: async (newRecordData) => {
-      const res = await fetch("http://localhost:3000/api/workouts/", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/workouts/`, {
         credentials: "include",
         method: "POST",
         body: JSON.stringify(newRecordData),

@@ -10,7 +10,7 @@ const Main = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["workouts"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:3000/api/workouts");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/workouts`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

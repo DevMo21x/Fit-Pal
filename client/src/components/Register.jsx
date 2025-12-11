@@ -19,7 +19,7 @@ const Register = (props) => {
   //create our mutation to communicate to the API
   const mutation = useMutation({
     mutationFn: async (loginData) => {
-      const res = await fetch("http://localhost:3000/api/users/register", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/register`, {
         credentials: "include",
         method: "POST",
         body: JSON.stringify(loginData),

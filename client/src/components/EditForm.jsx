@@ -23,7 +23,7 @@ const EditForm = () => {
     const fetchWorkout = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(`http://localhost:3000/api/workouts/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/workouts/${id}`, {
           credentials: "include",
           method: "GET",
           headers: {
@@ -128,7 +128,7 @@ const EditForm = () => {
 
   const mutation = useMutation({
     mutationFn: async (updatedRecordData) => {
-      const res = await fetch(`http://localhost:3000/api/workouts/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/workouts/${id}`, {
         credentials: "include",
         method: "PUT",
         body: JSON.stringify(updatedRecordData),

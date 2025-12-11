@@ -12,7 +12,7 @@ export const signOut = async () => {
     credentials: "include",
   };
   const response = await fetch(
-    "http://localhost:3000/api/users/logout",
+    `${import.meta.env.VITE_API_URL}/users/logout`,
     fetchOptions
   );
 };

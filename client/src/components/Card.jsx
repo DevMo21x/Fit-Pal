@@ -8,7 +8,7 @@ const Card = ({ item }) => {
   // Create mutation for delete
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      const response = await fetch(`http://localhost:3000/api/workouts/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/workouts/${id}`, {
         method: "DELETE",
         credentials: "include",
         headers: {
