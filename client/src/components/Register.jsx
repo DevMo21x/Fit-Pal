@@ -19,21 +19,28 @@ const Register = (props) => {
   //create our mutation to communicate to the API
   const mutation = useMutation({
     mutationFn: async (loginData) => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/register`, {
-        credentials: "include",
-        method: "POST",
-        body: JSON.stringify(loginData),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/register`,
+        {
+          credentials: "include",
+          method: "POST",
+          body: JSON.stringify(loginData),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
       if (!res.ok) throw new Error("Register unsuccessful");
       return await res.json();
     },
     onSuccess: (responseBody) => {
       console.log("Registered!", responseBody);
 
-      // cookie has been set...token is available
+      const userEmail = responseBody.email;
+
+      // Set variable in the session storage
+      sessionStorage.setItem("authenticated", true);
+      sessionStorage.setItem("user", userEmail);
 
       // redirect to the home page/route
       navigate("/");

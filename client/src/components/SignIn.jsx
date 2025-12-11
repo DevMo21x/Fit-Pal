@@ -39,7 +39,6 @@ const SignIn = (props) => {
       // Set variable in the session storage
       sessionStorage.setItem("authenticated", true);
       sessionStorage.setItem("user", userEmail);
-      // sessionStorage.setItem('user', response.body.email);
       // redirect to the home page/route
       navigate("/");
     },
