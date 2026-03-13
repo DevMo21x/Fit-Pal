@@ -23,9 +23,9 @@ const Main = () => {
     ? data.filter((item) => {
         const query = searchQuery.toLowerCase().trim();
 
-        if (!query) return true; // Show all if search is empty
+        if (!query) return true; 
 
-        // Search only in user name (first name + last name)
+        // Search only in user name
         const userName = `${item.user?.firstName || ""} ${
           item.user?.lastName || ""
         }`.toLowerCase();

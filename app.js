@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import indexRouter from "./routes/index.js";
+import indexRouter from "./routes/index.js";  
 import apiRouter from "./routes/api/index.js";
 
 // import usersRouter from "./routes/api/users.js";
@@ -28,7 +28,7 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
-  })
+  }),
 );
 app.use(logger("dev"));
 app.use(express.json());

@@ -8,6 +8,8 @@ const EditForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  // get the workout id from the url
   const { id } = useParams();
 
   // State for toggling sections
